@@ -43,6 +43,7 @@
 		B0CB763D2706A21500500C03 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB763B2706A21500500C03 /* LabelTableViewCell.swift */; };
 		B0CB764D27077BAB00500C03 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB764B27077BAB00500C03 /* SwitchTableViewCell.swift */; };
 		B0F45A3A2740013400DDC2CA /* BeforeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F45A392740013400DDC2CA /* BeforeLoginViewController.swift */; };
+		B0FF92CF2742183400AEA200 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF92CE2742183400AEA200 /* Secret.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		B0CB763B2706A21500500C03 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		B0CB764B27077BAB00500C03 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		B0F45A392740013400DDC2CA /* BeforeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeLoginViewController.swift; sourceTree = "<group>"; };
+		B0FF92CE2742183400AEA200 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				B03A62F8271EA053004BB8F0 /* UpperVCDelegate.swift */,
 				B03A62CF271A86BA004BB8F0 /* SettingItem.swift */,
 				B0C8B11226F1955500C09E20 /* Constants.swift */,
+				B0FF92CE2742183400AEA200 /* Secret.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				B03A62D5271D64D4004BB8F0 /* mainDetailTableViewCell.swift in Sources */,
 				B00678CE270EDD30006F5718 /* TableViewCellDelegate.swift in Sources */,
 				B051597D26DF2A770035D8D0 /* MonthData.swift in Sources */,
+				B0FF92CF2742183400AEA200 /* Secret.swift in Sources */,
 				B05159E026E5D6C20035D8D0 /* CalendarViewModel.swift in Sources */,
 				B094E5FA26FD700900174382 /* TextFieldTableViewCell.swift in Sources */,
 				B0B96072271850C5006090A2 /* Event.swift in Sources */,
