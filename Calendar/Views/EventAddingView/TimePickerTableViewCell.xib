@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="404" id="KGk-i7-Jjw" customClass="TimePickerTableViewCell" customModule="Calendar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I0X-JL-DzU">
+                        <rect key="frame" x="15" y="0.0" width="345" height="54"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-sj-ipA">
+                                <rect key="frame" x="0.0" y="4.6666666666666679" width="100" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="7qa-eY-SAg"/>
+                                    <constraint firstAttribute="height" constant="45" id="zhO-EU-01g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="1kn-tR-Y0N">
+                                <rect key="frame" x="100" y="4.6666666666666679" width="245" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="l5o-bN-nqe"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="timePickerChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="9Qz-AZ-lvQ"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1kn-tR-Y0N" firstAttribute="leading" secondItem="I0X-JL-DzU" secondAttribute="leading" constant="100" id="c1F-ra-DMy"/>
+                        </constraints>
+                    </stackView>
+                    <datePicker contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="S15-Qz-4kJ">
+                        <rect key="frame" x="15" y="54" width="345" height="350"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="350" id="9Tj-1a-5QD"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                        <connections>
+                            <action selector="datePickerChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="7GK-hc-3nx"/>
+                        </connections>
+                    </datePicker>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="I0X-JL-DzU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="9BS-pI-KCw"/>
+                    <constraint firstAttribute="bottom" secondItem="S15-Qz-4kJ" secondAttribute="bottom" id="TFT-TE-lbW"/>
+                    <constraint firstAttribute="trailing" secondItem="S15-Qz-4kJ" secondAttribute="trailing" constant="15" id="Wrg-lX-fMM"/>
+                    <constraint firstItem="S15-Qz-4kJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Wzw-aA-oir"/>
+                    <constraint firstItem="I0X-JL-DzU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Yuj-eY-j4w"/>
+                    <constraint firstAttribute="trailing" secondItem="I0X-JL-DzU" secondAttribute="trailing" constant="15" id="cbz-lT-09A"/>
+                    <constraint firstItem="S15-Qz-4kJ" firstAttribute="top" secondItem="I0X-JL-DzU" secondAttribute="bottom" id="vE6-fw-77s"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="TimePickerStackView" destination="I0X-JL-DzU" id="0fd-Bq-vOM"/>
+                <outlet property="datePicker" destination="S15-Qz-4kJ" id="BZj-I8-kSm"/>
+                <outlet property="datePickerTopConstraint" destination="vE6-fw-77s" id="o5y-YN-4ap"/>
+                <outlet property="timePicker" destination="1kn-tR-Y0N" id="QSY-hU-l16"/>
+            </connections>
+            <point key="canvasLocation" x="-237.69230769230768" y="-128.67298578199052"/>
+        </tableViewCell>
+    </objects>
+</document>
