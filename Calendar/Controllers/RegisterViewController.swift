@@ -48,6 +48,12 @@ class RegisterViewController: UIViewController {
             self.errorLabel.isHidden = false
             return
         }
+        if password.count < 6 || password.count > 128{
+            self.errorLabel.text = "Password must be between 6 and 128 charcters"
+            self.errorLabel.isHidden = false
+            return
+        }
+        
         activityIndicator.startAnimating()
         client.registerUser(email: email, password: password) { (error) in
             guard error == nil else {
@@ -108,5 +114,15 @@ extension RegisterViewController: UITextFieldDelegate{
             registerButton.isEnabled = false
         }
         errorLabel.isHidden = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField{
+            passwordTextField.becomeFirstResponder()
+        }else{
+            textField.endEditing(true)
+        }
+        
+        return false
     }
 }

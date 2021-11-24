@@ -45,7 +45,6 @@ class LoginViewController: UIViewController {
         passwordTextField.text = "123456"
         loginButton.isEnabled = true
         errorLabel.isHidden = true
-        print(app.currentUser?.profile.email)
     }
     
     @IBAction func loginPressed(_ sender: UIButton) {
@@ -116,6 +115,16 @@ extension LoginViewController: UITextFieldDelegate{
             loginButton.isEnabled = false
         }
         errorLabel.isHidden = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField{
+            passwordTextField.becomeFirstResponder()
+        }else{
+            textField.endEditing(true)
+        }
+        
+        return false
     }
 
     

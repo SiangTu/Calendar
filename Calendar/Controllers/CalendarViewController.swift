@@ -13,7 +13,7 @@ class CalendarViewController: UIViewController{
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarScrollView: UIScrollView!
     @IBOutlet var collectionViews: [UICollectionView]!
-    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var calendarScrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var eventDisplayTable: UITableView!
     
     private var didScrollViewSet = false
@@ -28,26 +28,14 @@ class CalendarViewController: UIViewController{
         
         super.viewDidLoad()
         
-        setUpCollectionViews()
-        
-        calendarScrollView.delegate = self
-        scrollViewHeight.constant = collectionViews[1].frame.height + 20
-
-        eventDisplayTable.dataSource = self
-        eventDisplayTable.delegate = self
+        setLayout()
+        setRelationship()
     }
     
-    deinit{
-        print("bye")
-    }
-    func setUpCollectionViews(){
+    func setLayout(){
         
-        collectionViews[0].tag = 0
-        collectionViews[1].tag = 1
-        collectionViews[2].tag = 2
-        
+        calendarScrollViewHeight.constant = collectionViews[1].frame.height + 20
         for view in collectionViews{
-            
             let fullScreenSize =
                 UIScreen.main.bounds.size
             let layout = UICollectionViewFlowLayout()
@@ -60,7 +48,21 @@ class CalendarViewController: UIViewController{
             
             layout.headerReferenceSize = CGSize(width: 0, height: 20)
             view.collectionViewLayout = layout
-            
+        }
+    }
+    
+    func setRelationship(){
+        
+        calendarScrollView.delegate = self
+
+        eventDisplayTable.dataSource = self
+        eventDisplayTable.delegate = self
+        
+        collectionViews[0].tag = 0
+        collectionViews[1].tag = 1
+        collectionViews[2].tag = 2
+        
+        for view in collectionViews{
             
             view.register(UINib(nibName: Constants.calenderReusableView, bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: Constants.calenderReusableView)
             view.register(
@@ -73,7 +75,7 @@ class CalendarViewController: UIViewController{
     }
     
     override func viewWillLayoutSubviews() {
-        updateCollectionViews()
+        updateUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -84,13 +86,14 @@ class CalendarViewController: UIViewController{
         
         let alertText = app.currentUser!.profile.email! + "確定要登出嗎"
         let alertController = UIAlertController(title: alertText, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "登出", style: .destructive) { action in
+        let logoutAction = UIAlertAction(title: "登出", style: .destructive) { action in
            
             app.currentUser?.logOut(completion: { error in
                 if let error = error{
                     print(error)
                 }
             })
+            
             DispatchQueue.main.async {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let rootVC = storyboard.instantiateViewController(identifier: "BeforeLoginViewController")
@@ -102,14 +105,15 @@ class CalendarViewController: UIViewController{
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
-        alertController.addAction(deleteAction)
+        alertController.addAction(logoutAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
         
     }
+    
     //MARK: - updateUI Method
     
-    func updateCollectionViews(){
+    func updateUI(){
         
         monthLabel.text = calendarViewModel.getYearAndMonthStr()
         
@@ -146,31 +150,16 @@ extension CalendarViewController: UICollectionViewDataSource{
         let dayStr = calendarViewModel.getDate(viewTag: collectionView.tag, cellIndex: indexPath)
         cell.textLabel.text = dayStr
         
-        if cell.textLabel.text  == ""{
-            cell.isHidden = true
-        }else{
-            cell.isHidden = false
-        }
-        var selectedDay = calendarViewModel.getDefaultSelectedDay(viewTag: collectionView.tag)
-        // currentDay will change when cell selected
-        if collectionView.tag == 1{
-            selectedDay = calendarViewModel.currentDay
-        }
-        
-        if Int(dayStr) == selectedDay{
-            cell.textLabel.backgroundColor = UIColor(named: "cellSelected")
-            cell.textLabel.textColor = UIColor.systemBackground
-        }else{
-            cell.textLabel.backgroundColor = UIColor.systemBackground
-            cell.textLabel.textColor = UIColor(named: "cellSelected")
-        }
-       
+        cell.isHidden = dayStr == ""
+
+        let selectedDay = calendarViewModel.getDefaultSelectedDay(viewTag: collectionView.tag)
+        cell.isSelected = (Int(dayStr) == selectedDay)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
+
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: Constants.calenderReusableView, for: indexPath)
         return view
     }
@@ -183,21 +172,12 @@ extension CalendarViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CalenderViewCell
-        cell.textLabel.backgroundColor = UIColor(named: "cellSelected")
-        cell.textLabel.textColor = UIColor.systemBackground
-        
+
         calendarViewModel.currentDay = Int(cell.textLabel.text!)!
-        collectionViews[1].reloadData()
         eventsOfCurrentDay = calendarViewModel.getEventsOfCurrentDay()
         eventDisplayTable.reloadData()
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! CalenderViewCell
-        cell.textLabel.backgroundColor = UIColor.systemBackground
-        cell.textLabel.textColor = UIColor(named: "cellSelected")
-    }
-    
+
 }
 
 //MARK: - ScrollView Delegate Method
@@ -212,12 +192,12 @@ extension CalendarViewController: UIScrollViewDelegate{
             if scrollView.contentOffset.x == scrollViewWidth * 0, didScrollViewSet{
                 calendarViewModel.backToLastMonth()
                 calendarViewModel.updateMonthsData()
-                updateCollectionViews()
+                updateUI()
             }
             if scrollView.contentOffset.x == scrollViewWidth * 2 {
                 calendarViewModel.comeToNextMonth()
                 calendarViewModel.updateMonthsData()
-                updateCollectionViews()
+                updateUI()
             }
             
         }

@@ -208,9 +208,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="calendarScrollView" destination="VeX-bN-srB" id="g5i-d7-W7d"/>
+                        <outlet property="calendarScrollViewHeight" destination="fJx-1Y-FMf" id="BLB-ns-KXm"/>
                         <outlet property="eventDisplayTable" destination="P9i-yi-MwH" id="5gL-h2-vhZ"/>
                         <outlet property="monthLabel" destination="di6-FO-t5V" id="mT4-pD-0Fe"/>
-                        <outlet property="scrollViewHeight" destination="fJx-1Y-FMf" id="BLB-ns-KXm"/>
                         <outletCollection property="collectionViews" destination="rf3-b8-wjJ" collectionClass="NSMutableArray" id="U7Q-vw-G8G"/>
                         <outletCollection property="collectionViews" destination="q8e-VG-qv0" collectionClass="NSMutableArray" id="Ycb-2q-Mx8"/>
                         <outletCollection property="collectionViews" destination="WG3-ZZ-HHV" collectionClass="NSMutableArray" id="wLr-oF-Ze8"/>
@@ -555,7 +555,6 @@
         <!--Navigation Controller-->
         <scene sceneID="xlA-Cq-tUK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5DI-BS-LEk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GCN-YZ-NoU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="syM-6r-iRq"/>
@@ -568,6 +567,7 @@
                         <segue destination="ElH-17-anl" kind="relationship" relationship="rootViewController" id="mS0-6c-ZYa"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5DI-BS-LEk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-822" y="77"/>
         </scene>
